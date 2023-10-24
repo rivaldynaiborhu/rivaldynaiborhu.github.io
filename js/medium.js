@@ -54,14 +54,14 @@ fetch(apiUrl)
   .catch(error => console.error('Error:', error));
 
 
-  const apiUrll = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fapi.medium.com%2Ffeed%2F%40rivaldynaiborhu';
+//   const apiUrll = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fapi.medium.com%2Ffeed%2F%40rivaldynaiborhu';
 
-fetch(apiUrll)
-  .then(response => response.json())
-  .then(data => {
-    // Lakukan sesuatu dengan data yang diterima
-    console.log(data);
-    // Contoh: menampilkan judul dari item pertama
-    document.getElementById('judul').innerHTML = data.items[0].title;
-  })
-  .catch(error => console.error('Error:', error));
+// fetch(apiUrll)
+//   .then(response => response.json())
+//   .then(data => {
+//     // Lakukan sesuatu dengan data yang diterima
+//     console.log(data);
+//     // Contoh: menampilkan judul dari item pertama
+//     document.getElementById('judul').innerHTML = data.items[0].title;
+//   })
+//   .catch(error => console.error('Error:', error));
