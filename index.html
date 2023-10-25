@@ -5,9 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Home &mdash; Rivaldy Naiborhu</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+	<!-- <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="freehtml5.co" />
+	<meta name="author" content="freehtml5.co" /> -->
 
 
   	<!-- Facebook and Twitter integration -->
@@ -312,24 +312,32 @@
 				</div>
 			</div>
 
-			<div id="article-container"></div>
+			<div class="row" id="article-container"></div>
 			<style>
-				.article {
-				  border: 2px solid #ccc;
-				  border-radius: 8px;
-				  margin: 10px;
-				  padding: 10px;
+				 #article-container{
+					align-items: center;
+				 }
+
+				.article .blog-bg {
+				display: block;
+				margin-top: 50px;
+				width: 100%;
+				background-size: cover;
+				background-position: center center;
+				background-repeat: no-repeat;
+				position: relative;
+				border-radius: 8px;
+				height: 300px;
 				}
-				.article .blog-bg{
-					display: block;
-					width: 100%;
-					background-size: cover;
-					border-radius: 8px;
-					background-position: center center;
-					background-repeat: no-repeat;
-					position: relative;
-					height: 200px;
-					margin-bottom: 5px;
+				@media screen and (max-width: 768px) {
+				.article .blog-bg {
+					height: 400px;
+				}
+				}
+				@media screen and (max-width: 480px) {
+				.article .blog-bg {
+					height: 270px;
+				}
 				}
 			  </style>
 
@@ -383,14 +391,14 @@
 		</div>
 	</div>
 
-	<div id="fh5co-work" class="fh5co-bg-dark">
+	<!-- <div id="fh5co-work" class="fh5co-bg-dark">
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 					<h2>Work</h2>
 					<p>Coming Soon</p>
 				</div>
-			</div>
+			</div> -->
 			<!-- <div class="row">
 				<div class="col-md-3 text-center col-padding animate-box">
 					<a href="#" class="work" style="background-image: url(images/portfolio-1.jpg);">

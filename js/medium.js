@@ -13,7 +13,6 @@ fetch(apiUrl)
     articles.forEach((article, index) => {
       const articleElement = document.createElement('div');
       articleElement.classList.add('article');
-      articleElement.classList.add('row');
       articleElement.classList.add('col-md-4');
 
       const animateBox = document.createElement('div');
@@ -21,7 +20,7 @@ fetch(apiUrl)
       animateBox.classList.add('animate-box');
 
       const thumbnailElement = document.createElement('a');
-      thumbnailElement.href = article.link;
+      thumbnailElement.href = article.guid;
       thumbnailElement.classList.add('blog-bg');
       thumbnailElement.style.backgroundImage = `url(${article.thumbnail})`;
 
@@ -43,25 +42,16 @@ fetch(apiUrl)
 
       infoContainer.appendChild(pubDateElement);
       infoContainer.appendChild(titleElement);
+
       // infoContainer.appendChild(deskripsiElement);
 
       articleElement.appendChild(thumbnailElement);
       articleElement.appendChild(infoContainer);
-
       articleContainer.appendChild(articleElement);
+
+
+    
+
     });
   })
   .catch(error => console.error('Error:', error));
-
-
-//   const apiUrll = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fapi.medium.com%2Ffeed%2F%40rivaldynaiborhu';
-
-// fetch(apiUrll)
-//   .then(response => response.json())
-//   .then(data => {
-//     // Lakukan sesuatu dengan data yang diterima
-//     console.log(data);
-//     // Contoh: menampilkan judul dari item pertama
-//     document.getElementById('judul').innerHTML = data.items[0].title;
-//   })
-//   .catch(error => console.error('Error:', error));
