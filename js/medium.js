@@ -9,8 +9,15 @@ fetch(apiUrl)
   .then(data => {
     const articles = data.items;
     const articleContainer = document.getElementById('article-container');
+    console.log(articles);
+
 
     articles.forEach((article, index) => {
+
+      const pubDate = new Date(article.pubDate);
+      const formattedDate = pubDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      article.pubDate = formattedDate;
+
       const articleElement = document.createElement('div');
       articleElement.classList.add('article');
       articleElement.classList.add('col-md-4');
