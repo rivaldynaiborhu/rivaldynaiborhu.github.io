@@ -27,9 +27,9 @@ fetch(apiUrl)
       animateBox.classList.add('animate-box');
 
       const thumbnailElement = document.createElement('a');
-      thumbnailElement.href = article.guid;
-      thumbnailElement.classList.add('blog-bg');
-      thumbnailElement.style.backgroundImage = `url(${article.thumbnail})`;
+      // thumbnailElement.href = article.guid;
+      // thumbnailElement.classList.add('blog-bg');
+      // thumbnailElement.style.backgroundImage = `url(${article.thumbnail})`;
 
       const infoContainer = document.createElement('div');
       infoContainer.classList.add('blog-text');
