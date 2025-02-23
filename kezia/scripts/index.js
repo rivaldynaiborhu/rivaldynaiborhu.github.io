@@ -490,7 +490,8 @@ x = setInterval(function() {
         
             // Jika hitungan mundur mencapai 0, arahkan pengguna ke halaman tujuan
             if (countdownSeconds < 0) {
-                window.location.href = "happy-birthday/index.html";
+               // window.location.href = "happy-birthday/index.html";
+                  window.location.href = "https://gifft.me/o/d/yvizn7firfc1n2urx41k8oud";
             } else {
                 // Jalankan fungsi countdown lagi setelah 1 detik
                 setTimeout(countdown, 1000);
