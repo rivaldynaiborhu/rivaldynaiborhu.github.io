@@ -4,7 +4,7 @@ const giftbox = document.getElementById('merrywrap');
 const canvasC = document.getElementById('c');
 
 const config = {
-  birthdate: 'Jan 1, 2026',
+  birthdate: 'Feb 24, 2026',
   name: 'KEZIA SAYANG'
 };
 
@@ -526,3 +526,4 @@ x = setInterval(function() {
   //     console.log("happy birthday");
   // }
 }, second);
+
