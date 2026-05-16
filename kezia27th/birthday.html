@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Selamat Ulang Tahun! 🎂</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --pink: #ff6b9d;
+  --purple: #c44dff;
+  --yellow: #ffd700;
+  --orange: #ff8c42;
+  --teal: #00d4aa;
+  --blue: #4ecdc4;
+}
+
+body {
+  background: #0a0015;
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+/* BACKGROUND STARS */
+#starfield {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* CONFETTI */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* HEADER */
+.header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 40px 20px 20px;
+  animation: floatIn 1s ease-out;
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  background: linear-gradient(135deg, #ff6b9d, #ffd700, #c44dff, #00d4aa);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+  text-shadow: none;
+  line-height: 1.1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.emoji-row {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  animation: bounce 1s ease infinite alternate;
+  margin: 10px 0;
+  letter-spacing: 8px;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+.subtitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.8);
+  margin: 10px 0;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+  to { text-shadow: 0 0 30px rgba(255,215,0,1), 0 0 60px rgba(255,150,0,0.5); }
+}
+
+/* CAKE SECTION */
+.cake-section {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.blow-hint {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  color: #00d4aa;
+  margin-bottom: 15px;
+  animation: pulse-hint 1.5s ease infinite;
+  text-align: center;
+  padding: 8px 20px;
+  border: 2px solid #00d4aa;
+  border-radius: 20px;
+  background: rgba(0,212,170,0.1);
+  backdrop-filter: blur(5px);
+}
+
+@keyframes pulse-hint {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
+}
+
+.blow-hint.done {
+  color: #ffd700;
+  border-color: #ffd700;
+  background: rgba(255,215,0,0.1);
+  animation: none;
+}
+
+/* CAKE SVG CONTAINER */
+.cake-container {
+  position: relative;
+  cursor: pointer;
+  filter: drop-shadow(0 20px 40px rgba(255,107,157,0.4));
+  transition: transform 0.2s;
+}
+
+.cake-container:hover { transform: scale(1.02); }
+.cake-container:active { transform: scale(0.98); }
+
+#cake-svg { display: block; }
+
+/* Candle flames */
+.flame {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.flame.out { opacity: 0; }
+
+/* WISH SECTION */
+.wish-section {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 700px;
+  padding: 0 20px;
+  margin: 10px 0 30px;
+}
+
+.wish-card {
+  background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(196,77,255,0.15));
+  border: 2px solid rgba(255,107,157,0.4);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.wish-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--pink), var(--purple), var(--teal), var(--yellow));
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0.5;
+  animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+
+.wish-text {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: #fff;
+  line-height: 1.8;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.wish-text span {
+  color: var(--yellow);
+  font-weight: 900;
+}
+
+/* INTERACTIVE BUTTONS */
+.actions {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.action-btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+  color: #fff;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.action-btn:hover::before { transform: translateX(0); }
+.action-btn:active { transform: scale(0.95); }
+
+.btn-confetti { background: linear-gradient(135deg, #ff6b9d, #ff8c42); box-shadow: 0 4px 20px rgba(255,107,157,0.5); }
+.btn-music { background: linear-gradient(135deg, #c44dff, #4ecdc4); box-shadow: 0 4px 20px rgba(196,77,255,0.5); }
+.btn-firework { background: linear-gradient(135deg, #ffd700, #ff8c42); box-shadow: 0 4px 20px rgba(255,215,0,0.5); color: #1a0a00; }
+.btn-relight { background: linear-gradient(135deg, #00d4aa, #4ecdc4); box-shadow: 0 4px 20px rgba(0,212,170,0.5); }
+
+/* BALLOON DECORATIONS */
+.balloons {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  font-size: 3rem;
+  animation: floatBalloon linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatBalloon {
+  0% { transform: translateY(0) rotate(-5deg); }
+  25% { transform: translateY(-25vh) rotate(5deg); }
+  50% { transform: translateY(-50vh) rotate(-3deg); }
+  75% { transform: translateY(-75vh) rotate(4deg); }
+  100% { transform: translateY(-110vh) rotate(-5deg); opacity: 0; }
+}
+
+/* SMOKE EFFECT */
+.smoke {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200,200,200,0.6);
+  animation: smokeRise 2s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes smokeRise {
+  0% { opacity: 0.6; transform: scale(0.3) translateY(0); }
+  100% { opacity: 0; transform: scale(2) translateY(-40px); }
+}
+
+/* COUNTER */
+.candle-counter {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* FIREWORK canvas */
+#firework-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* MUSIC NOTE floating */
+.music-note {
+  position: fixed;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: noteFloat 3s ease-out forwards;
+  z-index: 200;
+}
+
+@keyframes noteFloat {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(0.5); }
+  100% { opacity: 0; transform: translateY(-200px) rotate(360deg) scale(1.5); }
+}
+
+/* PARTY POPPER */
+.popper {
+  position: fixed;
+  font-size: 4rem;
+  pointer-events: none;
+  z-index: 200;
+  animation: popperAnim 0.6s ease-out forwards;
+}
+
+@keyframes popperAnim {
+  0% { transform: scale(0) rotate(-30deg); opacity: 1; }
+  60% { transform: scale(1.3) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 0; }
+}
+
+/* BACK BTN */
+.back-btn {
+  position: relative;
+  z-index: 10;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: 10px 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  transition: all 0.2s;
+  backdrop-filter: blur(5px);
+}
+
+.back-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+
+/* SPARKLE */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 150;
+  font-size: 1.5rem;
+  animation: sparkleAnim 1s ease-out forwards;
+}
+
+@keyframes sparkleAnim {
+  0% { transform: scale(0) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<canvas id="confetti-canvas"></canvas>
+<canvas id="firework-canvas"></canvas>
+<div class="balloons" id="balloons"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="emoji-row">🎉 🎊 🥳 🎈 🎊 🎉</div>
+  <h1>Selamat<br>Ulang Tahun!</h1>
+  <div class="emoji-row" style="animation-delay:0.3s">🎂 🎁 🌟 💖 🌟 🎁 🎂</div>
+  <p class="subtitle">✨ Quest Selesai — Kamu Luar Biasa! ✨</p>
+</div>
+
+<!-- CAKE -->
+<div class="cake-section">
+  <div class="candle-counter" id="candle-counter">🕯️ 5 lilin menyala — klik untuk mematikan!</div>
+  <div class="blow-hint" id="blow-hint">🫁 Klik lilin satu per satu atau klik kue untuk meniup semua!</div>
+
+  <div class="cake-container" id="cake-wrap">
+    <svg id="cake-svg" width="400" height="360" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+      <!-- PLATE -->
+      <ellipse cx="200" cy="330" rx="185" ry="22" fill="#c8a56a" />
+      <ellipse cx="200" cy="325" rx="185" ry="22" fill="#e8c890" />
+
+      <!-- CAKE BOTTOM LAYER -->
+      <rect x="35" y="240" width="330" height="85" rx="8" fill="#ff6b9d"/>
+      <rect x="35" y="240" width="330" height="20" rx="8" fill="#ff8ec0"/>
+      <!-- Pink stripes bottom -->
+      <rect x="70" y="240" width="15" height="85" fill="rgba(255,255,255,0.08)"/>
+      <rect x="120" y="240" width="15" height="85" fill="rgba(255,255,255,0.08)"/>
+      <rect x="170" y="240" width="15" height="85" fill="rgba(255,255,255,0.08)"/>
+      <rect x="220" y="240" width="15" height="85" fill="rgba(255,255,255,0.08)"/>
+      <rect x="270" y="240" width="15" height="85" fill="rgba(255,255,255,0.08)"/>
+      <rect x="320" y="240" width="15" height="85" fill="rgba(255,255,255,0.08)"/>
+      <!-- Bottom frosting drips -->
+      <path d="M35,248 Q50,270 65,248 Q80,270 95,248 Q110,270 125,248 Q140,270 155,248 Q170,270 185,248 Q200,270 215,248 Q230,270 245,248 Q260,270 275,248 Q290,270 305,248 Q320,270 335,248 Q350,270 365,248" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+      <!-- Dots decoration bottom -->
+      <circle cx="85" cy="290" r="6" fill="#ffd700"/>
+      <circle cx="140" cy="280" r="5" fill="#c44dff"/>
+      <circle cx="200" cy="292" r="7" fill="#00d4aa"/>
+      <circle cx="260" cy="278" r="5" fill="#ff8c42"/>
+      <circle cx="315" cy="288" r="6" fill="#4ecdc4"/>
+
+      <!-- CAKE MIDDLE LAYER -->
+      <rect x="60" y="165" width="280" height="80" rx="8" fill="#c44dff"/>
+      <rect x="60" y="165" width="280" height="18" rx="8" fill="#d978ff"/>
+      <!-- Middle stripes -->
+      <rect x="90" y="165" width="12" height="80" fill="rgba(255,255,255,0.08)"/>
+      <rect x="140" y="165" width="12" height="80" fill="rgba(255,255,255,0.08)"/>
+      <rect x="190" y="165" width="12" height="80" fill="rgba(255,255,255,0.08)"/>
+      <rect x="240" y="165" width="12" height="80" fill="rgba(255,255,255,0.08)"/>
+      <rect x="290" y="165" width="12" height="80" fill="rgba(255,255,255,0.08)"/>
+      <!-- Middle frosting drips -->
+      <path d="M60,172 Q73,192 86,172 Q99,192 112,172 Q125,192 138,172 Q151,192 164,172 Q177,192 190,172 Q203,192 216,172 Q229,192 242,172 Q255,192 268,172 Q281,192 294,172 Q307,192 320,172 Q333,192 340,172" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+      <!-- Stars decoration middle -->
+      <text x="100" y="215" font-size="16" fill="#ffd700">★</text>
+      <text x="155" y="208" font-size="14" fill="#ff6b9d">★</text>
+      <text x="215" y="213" font-size="18" fill="#00d4aa">★</text>
+      <text x="272" y="206" font-size="14" fill="#ffd700">★</text>
+      <text x="315" y="210" font-size="16" fill="#ff6b9d">★</text>
+
+      <!-- CAKE TOP LAYER -->
+      <rect x="90" y="105" width="220" height="65" rx="8" fill="#ffd700"/>
+      <rect x="90" y="105" width="220" height="15" rx="8" fill="#ffe54d"/>
+      <!-- Top stripes -->
+      <rect x="115" y="105" width="10" height="65" fill="rgba(255,255,255,0.1)"/>
+      <rect x="160" y="105" width="10" height="65" fill="rgba(255,255,255,0.1)"/>
+      <rect x="210" y="105" width="10" height="65" fill="rgba(255,255,255,0.1)"/>
+      <rect x="258" y="105" width="10" height="65" fill="rgba(255,255,255,0.1)"/>
+      <!-- Top frosting drips -->
+      <path d="M90,111 Q103,128 116,111 Q129,128 142,111 Q155,128 168,111 Q181,128 194,111 Q207,128 220,111 Q233,128 246,111 Q259,128 272,111 Q285,128 298,111 Q311,128 310,111" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+      <!-- Text on top layer -->
+      <text x="200" y="148" text-anchor="middle" font-family="Fredoka One, cursive" font-size="22" fill="#ff6b9d" stroke="white" stroke-width="2" paint-order="stroke">HBD! 🎂</text>
+
+      <!-- CANDLE BASES -->
+      <g id="candle-0">
+        <rect x="118" y="80" width="12" height="28" rx="3" fill="#ff6b9d"/>
+        <rect x="117" y="78" width="14" height="6" rx="2" fill="#ff8ec0"/>
+      </g>
+      <g id="candle-1">
+        <rect x="155" y="75" width="12" height="33" rx="3" fill="#c44dff"/>
+        <rect x="154" y="73" width="14" height="6" rx="2" fill="#d978ff"/>
+      </g>
+      <g id="candle-2">
+        <rect x="194" y="72" width="12" height="36" rx="3" fill="#00d4aa"/>
+        <rect x="193" y="70" width="14" height="6" rx="2" fill="#00f0c0"/>
+      </g>
+      <g id="candle-3">
+        <rect x="233" y="75" width="12" height="33" rx="3" fill="#ff8c42"/>
+        <rect x="232" y="73" width="14" height="6" rx="2" fill="#ffaa70"/>
+      </g>
+      <g id="candle-4">
+        <rect x="272" y="80" width="12" height="28" rx="3" fill="#ffd700"/>
+        <rect x="271" y="78" width="14" height="6" rx="2" fill="#ffe54d"/>
+      </g>
+
+      <!-- FLAMES (will be toggled) -->
+      <g class="flame" id="flame-0" data-candle="0">
+        <ellipse cx="124" cy="72" rx="5" ry="7" fill="#ff8c42" opacity="0.9"/>
+        <ellipse cx="124" cy="70" rx="3" ry="5" fill="#ffd700"/>
+        <ellipse cx="124" cy="69" rx="1.5" ry="2.5" fill="white"/>
+        <line x1="124" y1="77" x2="124" y2="80" stroke="#555" stroke-width="1.5" opacity="0.5"/>
+      </g>
+      <g class="flame" id="flame-1" data-candle="1">
+        <ellipse cx="161" cy="66" rx="5" ry="7" fill="#ff8c42" opacity="0.9"/>
+        <ellipse cx="161" cy="64" rx="3" ry="5" fill="#ffd700"/>
+        <ellipse cx="161" cy="63" rx="1.5" ry="2.5" fill="white"/>
+        <line x1="161" y1="71" x2="161" y2="74" stroke="#555" stroke-width="1.5" opacity="0.5"/>
+      </g>
+      <g class="flame" id="flame-2" data-candle="2">
+        <ellipse cx="200" cy="63" rx="5" ry="7" fill="#ff8c42" opacity="0.9"/>
+        <ellipse cx="200" cy="61" rx="3" ry="5" fill="#ffd700"/>
+        <ellipse cx="200" cy="60" rx="1.5" ry="2.5" fill="white"/>
+        <line x1="200" y1="68" x2="200" y2="71" stroke="#555" stroke-width="1.5" opacity="0.5"/>
+      </g>
+      <g class="flame" id="flame-3" data-candle="3">
+        <ellipse cx="239" cy="66" rx="5" ry="7" fill="#ff8c42" opacity="0.9"/>
+        <ellipse cx="239" cy="64" rx="3" ry="5" fill="#ffd700"/>
+        <ellipse cx="239" cy="63" rx="1.5" ry="2.5" fill="white"/>
+        <line x1="239" y1="71" x2="239" y2="74" stroke="#555" stroke-width="1.5" opacity="0.5"/>
+      </g>
+      <g class="flame" id="flame-4" data-candle="4">
+        <ellipse cx="278" cy="72" rx="5" ry="7" fill="#ff8c42" opacity="0.9"/>
+        <ellipse cx="278" cy="70" rx="3" ry="5" fill="#ffd700"/>
+        <ellipse cx="278" cy="69" rx="1.5" ry="2.5" fill="white"/>
+        <line x1="278" y1="77" x2="278" y2="80" stroke="#555" stroke-width="1.5" opacity="0.5"/>
+      </g>
+
+      <!-- DECORATIVE SPRINKLES on plate -->
+      <rect x="80" y="318" width="6" height="2" rx="1" fill="#ff6b9d" transform="rotate(30,83,319)"/>
+      <rect x="130" y="322" width="6" height="2" rx="1" fill="#00d4aa" transform="rotate(-20,133,323)"/>
+      <rect x="180" y="316" width="6" height="2" rx="1" fill="#ffd700" transform="rotate(45,183,317)"/>
+      <rect x="230" y="320" width="6" height="2" rx="1" fill="#c44dff" transform="rotate(-35,233,321)"/>
+      <rect x="280" y="317" width="6" height="2" rx="1" fill="#ff8c42" transform="rotate(20,283,318)"/>
+      <rect x="310" y="321" width="6" height="2" rx="1" fill="#4ecdc4" transform="rotate(-50,313,322)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- WISH CARD -->
+<div class="wish-section">
+  <div class="wish-card">
+    <p class="wish-text">
+      🌟 Selamat ulang Tahun ke - 27, Sayang<br><br>
+      Semoga <span>sehat selalu</span>, dipenuhi <span>kebahagiaan</span>, dan semoga harapanmu di tahun ini bisa jadi <span>kenyataan</span>! 🎊<br><br>
+      Terima kasih sudah jadi orang yang selalu care dan peduli sama semua orang, termasuk sa :D <br>
+      Semoga Tuhan selalu menuntun dan berkati setiap langkahmu  —<br>
+      <span>Selamat Ulang Tahun, Sayang! 🏆</span>
+    </p>
+  </div>
+</div>
+
+<!-- ACTIONS -->
+<div class="actions">
+  <button class="action-btn btn-confetti" onclick="launchConfetti()">🎊 Hujan Konfeti!</button>
+  <button class="action-btn btn-firework" onclick="launchFireworks()">🎆 Kembang Api!</button>
+  <button class="action-btn btn-music" onclick="playMusic()">🎵 Nyanyikan Lagu!</button>
+  <button class="action-btn btn-relight" onclick="relightAll()">🔥 Nyalakan Lilin Lagi</button>
+</div>
+
+<a class="back-btn" href="game3d.html">← Kembali ke Game</a>
+
+<script>
+// ===== STARFIELD =====
+const starCanvas = document.getElementById('starfield');
+const starCtx = starCanvas.getContext('2d');
+starCanvas.width = window.innerWidth;
+starCanvas.height = window.innerHeight;
+
+const stars = Array.from({length: 200}, () => ({
+  x: Math.random() * starCanvas.width,
+  y: Math.random() * starCanvas.height,
+  r: Math.random() * 2,
+  speed: Math.random() * 0.5 + 0.1,
+  twinkle: Math.random() * Math.PI * 2
+}));
+
+function drawStars() {
+  starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+  stars.forEach(s => {
+    s.twinkle += 0.05;
+    const alpha = 0.4 + Math.sin(s.twinkle) * 0.4;
+    starCtx.fillStyle = `rgba(255,255,255,${alpha})`;
+    starCtx.beginPath();
+    starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    starCtx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ===== CANDLES =====
+const totalCandles = 5;
+let litCandles = new Set([0,1,2,3,4]);
+let allOut = false;
+
+function updateCounter() {
+  const left = litCandles.size;
+  document.getElementById('candle-counter').textContent = left > 0
+    ? `🕯️ ${left} lilin menyala — klik untuk mematikan!`
+    : '✨ Semua lilin padam! Permintaanmu akan dikabulkan! ✨';
+}
+
+function blowCandle(i) {
+  if (!litCandles.has(i)) return;
+  litCandles.delete(i);
+  const flame = document.getElementById(`flame-${i}`);
+  flame.classList.add('out');
+
+  // Smoke effect
+  const svgRect = document.getElementById('cake-svg').getBoundingClientRect();
+  const flamePositions = [124,161,200,239,278];
+  const flameY = [72,66,63,66,72];
+  const scaleX = svgRect.width / 400;
+  const scaleY = svgRect.height / 360;
+  const sx = svgRect.left + flamePositions[i] * scaleX;
+  const sy = svgRect.top + flameY[i] * scaleY;
+  createSmoke(sx, sy);
+
+  updateCounter();
+  if (litCandles.size === 0 && !allOut) {
+    allOut = true;
+    document.getElementById('blow-hint').textContent = '🎉 Semua lilin padam! Selamat!';
+    document.getElementById('blow-hint').classList.add('done');
+    setTimeout(() => { launchConfetti(); launchFireworks(); }, 400);
+  }
+}
+
+function createSmoke(x, y) {
+  for (let i = 0; i < 4; i++) {
+    const s = document.createElement('div');
+    s.className = 'smoke';
+    const size = 8 + Math.random() * 12;
+    s.style.cssText = `width:${size}px;height:${size}px;left:${x + (Math.random()-0.5)*20}px;top:${y}px;`;
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 2000);
+  }
+}
+
+// Click individual flames
+document.querySelectorAll('.flame').forEach(f => {
+  f.style.cursor = 'pointer';
+  f.addEventListener('click', e => {
+    e.stopPropagation();
+    blowCandle(parseInt(f.dataset.candle));
+  });
+});
+
+// Click cake = blow all
+document.getElementById('cake-wrap').addEventListener('click', () => {
+  if (litCandles.size === 0) return;
+  [...litCandles].forEach(i => setTimeout(() => blowCandle(i), i * 200));
+});
+
+function relightAll() {
+  litCandles = new Set([0,1,2,3,4]);
+  allOut = false;
+  document.querySelectorAll('.flame').forEach(f => f.classList.remove('out'));
+  document.getElementById('blow-hint').textContent = '🫁 Klik lilin satu per satu atau klik kue untuk meniup semua!';
+  document.getElementById('blow-hint').classList.remove('done');
+  updateCounter();
+  spawnSparkles('🔥', 5);
+}
+
+updateCounter();
+
+// ===== CONFETTI =====
+const confCanvas = document.getElementById('confetti-canvas');
+const confCtx = confCanvas.getContext('2d');
+confCanvas.width = window.innerWidth;
+confCanvas.height = window.innerHeight;
+
+let confettiParticles = [];
+let confettiRunning = false;
+
+function launchConfetti() {
+  const colors = ['#ff6b9d','#c44dff','#ffd700','#00d4aa','#ff8c42','#4ecdc4','#fff'];
+  for (let i = 0; i < 200; i++) {
+    confettiParticles.push({
+      x: Math.random() * confCanvas.width,
+      y: -20,
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 4 + 2,
+      rot: Math.random() * 360,
+      rotSpeed: (Math.random()-0.5)*8,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      w: Math.random() * 10 + 6,
+      h: Math.random() * 6 + 4,
+      life: 1
+    });
+  }
+  if (!confettiRunning) { confettiRunning = true; animConfetti(); }
+  spawnPoppers();
+}
+
+function animConfetti() {
+  confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+  confettiParticles = confettiParticles.filter(p => p.y < confCanvas.height + 40 && p.life > 0);
+  confettiParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.rot += p.rotSpeed;
+    p.vx *= 0.99;
+    confCtx.save();
+    confCtx.globalAlpha = p.life;
+    confCtx.translate(p.x, p.y);
+    confCtx.rotate(p.rot * Math.PI / 180);
+    confCtx.fillStyle = p.color;
+    confCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+    confCtx.restore();
+  });
+  if (confettiParticles.length > 0) requestAnimationFrame(animConfetti);
+  else confettiRunning = false;
+}
+
+// ===== FIREWORKS =====
+const fwCanvas = document.getElementById('firework-canvas');
+const fwCtx = fwCanvas.getContext('2d');
+fwCanvas.width = window.innerWidth;
+fwCanvas.height = window.innerHeight;
+
+let fwParticles = [];
+let fwRunning = false;
+
+function launchFireworks() {
+  const colors = ['#ff6b9d','#ffd700','#c44dff','#00d4aa','#ff8c42','#fff','#4ecdc4'];
+  for (let b = 0; b < 8; b++) {
+    setTimeout(() => {
+      const bx = 100 + Math.random() * (fwCanvas.width - 200);
+      const by = 80 + Math.random() * (fwCanvas.height * 0.5);
+      const col = colors[Math.floor(Math.random()*colors.length)];
+      for (let i = 0; i < 60; i++) {
+        const angle = (i / 60) * Math.PI * 2;
+        const speed = Math.random() * 5 + 2;
+        fwParticles.push({
+          x: bx, y: by,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          color: col,
+          life: 1,
+          r: Math.random() * 3 + 1
+        });
+      }
+      if (!fwRunning) { fwRunning = true; animFireworks(); }
+    }, b * 300);
+  }
+  spawnSparkles('✨', 12);
+}
+
+function animFireworks() {
+  fwCtx.fillStyle = 'rgba(0,0,0,0.15)';
+  fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+  fwParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    p.vy += 0.08;
+    p.vx *= 0.97;
+    p.life -= 0.018;
+    fwCtx.globalAlpha = Math.max(0, p.life);
+    fwCtx.fillStyle = p.color;
+    fwCtx.beginPath();
+    fwCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    fwCtx.fill();
+  });
+  fwCtx.globalAlpha = 1;
+  fwParticles = fwParticles.filter(p => p.life > 0);
+  if (fwParticles.length > 0) requestAnimationFrame(animFireworks);
+  else { fwRunning = false; fwCtx.clearRect(0,0,fwCanvas.width,fwCanvas.height); }
+}
+
+// ===== BALLOONS =====
+function spawnBalloon() {
+  const emojis = ['🎈','🎈','🎈','🎉','🎊','⭐','🌟','💖','🎁'];
+  const el = document.createElement('div');
+  el.className = 'balloon';
+  el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left = Math.random() * 100 + 'vw';
+  el.style.animationDuration = (6 + Math.random() * 6) + 's';
+  el.style.animationDelay = (Math.random() * 2) + 's';
+  el.style.fontSize = (2 + Math.random() * 2) + 'rem';
+  document.getElementById('balloons').appendChild(el);
+  setTimeout(() => el.remove(), 14000);
+}
+
+setInterval(spawnBalloon, 1200);
+for (let i = 0; i < 5; i++) setTimeout(spawnBalloon, i * 400);
+
+// ===== MUSIC =====
+function playMusic() {
+  const notes = ['🎵','🎶','🎼','🎸','🎹','🎺','🎻'];
+  const lyrics = ['Happy Birthday to You~','Selamat Ulang Tahun~','Happy Birthday~','Bahagia Selalu~'];
+  const announcement = document.createElement('div');
+  announcement.style.cssText = `
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:rgba(10,0,21,0.95);border:3px solid #ffd700;
+    padding:30px 40px;border-radius:20px;z-index:300;
+    font-family:'Fredoka One',cursive;font-size:1.4rem;color:#ffd700;
+    text-align:center;animation:floatIn 0.5s ease-out;
+    box-shadow:0 0 60px rgba(255,215,0,0.4);
+  `;
+  announcement.innerHTML = `🎵 Selamat Ulang Tahun 🎵<br><span style="font-size:0.8rem;color:#fff;font-family:Nunito">(Bersenandunglah bersama!)</span><br><br><span style="font-size:1rem">${lyrics[0]}</span>`;
+
+  let line = 0;
+  const iv = setInterval(() => {
+    line++;
+    if (line < lyrics.length) {
+      announcement.querySelector('span:last-child').textContent = lyrics[line];
+    } else { clearInterval(iv); setTimeout(() => announcement.remove(), 1000); }
+  }, 2000);
+
+  document.body.appendChild(announcement);
+  announcement.addEventListener('click', () => { clearInterval(iv); announcement.remove(); });
+
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const n = document.createElement('div');
+      n.className = 'music-note';
+      n.textContent = notes[Math.floor(Math.random()*notes.length)];
+      n.style.left = (10 + Math.random() * 80) + 'vw';
+      n.style.top = (20 + Math.random() * 60) + 'vh';
+      document.body.appendChild(n);
+      setTimeout(() => n.remove(), 3000);
+    }, i * 200);
+  }
+}
+
+// ===== SPARKLES =====
+function spawnSparkles(emoji, count) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.textContent = emoji;
+      s.style.left = (10 + Math.random() * 80) + 'vw';
+      s.style.top = (10 + Math.random() * 80) + 'vh';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1000);
+    }, i * 100);
+  }
+}
+
+function spawnPoppers() {
+  ['🎊','🎉','🥳'].forEach((e, i) => {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'popper';
+      p.textContent = e;
+      p.style.left = (20 + i * 30) + 'vw';
+      p.style.top = (20 + Math.random() * 30) + 'vh';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 700);
+    }, i * 150);
+  });
+}
+
+// Auto launch on load
+setTimeout(() => { launchConfetti(); }, 800);
+setTimeout(() => { launchFireworks(); }, 1500);
+
+// Responsive resize
+window.addEventListener('resize', () => {
+  starCanvas.width = confCanvas.width = fwCanvas.width = window.innerWidth;
+  starCanvas.height = confCanvas.height = fwCanvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>

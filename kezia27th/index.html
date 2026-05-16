@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Birthday Countdown</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #e8638c;
+    --pink-light: #f4a0bc;
+    --pink-pale: #fde8f0;
+    --pink-soft: #fac8da;
+    --text-dark: #5a2d42;
+    --text-mid: #a06080;
+    --text-light: #c899af;
+    --bg: #fff8fb;
+    --card: #ffffff;
+    --border: #f5c8d8;
+    --shadow: 0 4px 24px rgba(232,99,140,0.10);
+    --shadow-hover: 0 8px 32px rgba(232,99,140,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Subtle dot pattern background ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, var(--pink-soft) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Floating petals/balloons ── */
+  .balloons-wrap {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .balloon {
+    position: absolute;
+    bottom: -80px;
+    animation: floatUp var(--ft, 9s) ease-in infinite;
+    animation-delay: var(--fd, 0s);
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+  }
+
+  /* ── Main wrap ── */
+  .main {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 680px;
+    padding: 2.5rem 1.5rem 140px;
+    display: flex; flex-direction: column; align-items: center; gap: 2rem;
+  }
+
+  /* ── Title ── */
+  .title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2rem, 7vw, 3.4rem);
+    color: var(--pink);
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+
+  .subtitle {
+    color: var(--text-light);
+    font-size: clamp(0.82rem, 2.5vw, 1rem);
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── Date display ── */
+  .date-badge {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    padding: 0.45rem 1.4rem;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    box-shadow: var(--shadow);
+  }
+
+  /* ── Countdown cards ── */
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+  .unit {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 1.4rem 0.5rem 1.1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .unit:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+  .unit .num {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: var(--pink);
+    line-height: 1;
+    transition: transform 0.15s;
+  }
+  .unit .num.flip { animation: flip 0.3s ease; }
+  @keyframes flip {
+    0% { transform: scaleY(0.6); opacity: 0.4; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  .unit .lbl {
+    color: var(--text-light);
+    font-size: clamp(0.58rem, 2vw, 0.8rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 0.4rem;
+    font-weight: 700;
+  }
+
+  /* ── Gift / done state ── */
+  .gift-section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    animation: fadeIn 1s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
+  .gift-section.show { display: flex; }
+
+  .gift-emoji {
+    font-size: clamp(5rem, 18vw, 9rem);
+    cursor: pointer;
+    animation: giftBounce 1s ease-in-out infinite alternate;
+    transition: transform 0.2s;
+    user-select: none;
+  }
+  .gift-emoji:hover { transform: scale(1.12) rotate(-5deg); }
+  @keyframes giftBounce {
+    from { transform: translateY(0) rotate(-3deg); }
+    to { transform: translateY(-16px) rotate(3deg); }
+  }
+  .gift-text {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.4rem, 5vw, 2.4rem);
+    color: var(--pink);
+    text-align: center;
+  }
+  .gift-hint {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  /* confetti */
+  .confetti { position:fixed; inset:0; pointer-events:none; z-index:10; overflow:hidden; }
+  .c { position:absolute; top:-20px; width:10px; height:10px; opacity:0;
+       animation: confettiFall var(--cd,3s) var(--cdel,0s) ease-in forwards; border-radius:2px; }
+  @keyframes confettiFall {
+    0%   { opacity:1; transform: translateY(0) rotate(0deg); }
+    100% { opacity:0; transform: translateY(110vh) rotate(720deg); }
+  }
+
+  /* ── Taskbar ── */
+  .taskbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background: rgba(255, 248, 251, 0.95);
+    border-top: 1.5px solid var(--border);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    z-index: 100;
+  }
+  .taskbar-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+
+  /* ground line */
+  .ground {
+    position: absolute;
+    bottom: 10px; left: 0; right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--pink-soft), var(--pink-light), var(--pink-soft), transparent);
+  }
+
+  /* character base */
+  .char {
+    position: absolute;
+    bottom: 12px;
+    width: 32px;
+    height: 44px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  .char svg { width: 100%; height: 100%; }
+
+  .char.walk { animation: walkMove var(--spd,14s) linear infinite; }
+  .char.run  { animation: runMove  var(--spd,7s)  linear infinite; }
+
+  @keyframes walkMove {
+    from { left: -60px; }
+    to   { left: calc(100% + 60px); }
+  }
+  @keyframes runMove {
+    from { left: -60px; }
+    to   { left: calc(100% + 60px); }
+  }
+
+  .char.walk .body-wrap { animation: walkBob 0.5s ease-in-out infinite alternate; }
+  @keyframes walkBob {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-3px); }
+  }
+  .char.run .body-wrap { animation: runBob 0.25s ease-in-out infinite alternate; }
+  @keyframes runBob {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-5px); }
+  }
+
+  .char.walk .leg-l { animation: legSwingL 0.5s ease-in-out infinite alternate; transform-origin: top center; }
+  .char.walk .leg-r { animation: legSwingR 0.5s ease-in-out infinite alternate; transform-origin: top center; }
+  @keyframes legSwingL { from{transform:rotate(-20deg);} to{transform:rotate(20deg);} }
+  @keyframes legSwingR { from{transform:rotate(20deg);} to{transform:rotate(-20deg);} }
+
+  .char.run .leg-l { animation: runLegL 0.22s ease-in-out infinite alternate; transform-origin: top center; }
+  .char.run .leg-r { animation: runLegR 0.22s ease-in-out infinite alternate; transform-origin: top center; }
+  @keyframes runLegL { from{transform:rotate(-38deg);} to{transform:rotate(30deg);} }
+  @keyframes runLegR { from{transform:rotate(30deg);} to{transform:rotate(-38deg);} }
+
+  .char.walk .arm-l { animation: armSwingL 0.5s ease-in-out infinite alternate; transform-origin: top center; }
+  .char.walk .arm-r { animation: armSwingR 0.5s ease-in-out infinite alternate; transform-origin: top center; }
+  .char.run  .arm-l { animation: runArmL 0.22s ease-in-out infinite alternate; transform-origin: top center; }
+  .char.run  .arm-r { animation: runArmR 0.22s ease-in-out infinite alternate; transform-origin: top center; }
+  @keyframes armSwingL { from{transform:rotate(15deg);} to{transform:rotate(-15deg);} }
+  @keyframes armSwingR { from{transform:rotate(-15deg);} to{transform:rotate(15deg);} }
+  @keyframes runArmL { from{transform:rotate(35deg);} to{transform:rotate(-30deg);} }
+  @keyframes runArmR { from{transform:rotate(-30deg);} to{transform:rotate(35deg);} }
+
+  @media(max-width:500px) {
+    .countdown { grid-template-columns: repeat(2,1fr); }
+    .unit { padding: 1rem 0.3rem; }
+  }
+  @media(min-width:900px) {
+    .main { max-width: 820px; }
+    .unit { padding: 1.6rem 1rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="balloons-wrap" id="balloons"></div>
+<div class="confetti" id="confetti"></div>
+
+<div class="main">
+  <div class="title">🎂 Countdown! 🎉</div>
+  <p class="subtitle">countdown to your birthday</p>
+  <div class="date-badge">📅 24 Februari 2026</div>
+
+  <!-- Countdown -->
+  <div class="countdown" id="countdownSection">
+    <div class="unit"><div class="num" id="days">00</div><div class="lbl">Hari</div></div>
+    <div class="unit"><div class="num" id="hours">00</div><div class="lbl">Jam</div></div>
+    <div class="unit"><div class="num" id="mins">00</div><div class="lbl">Menit</div></div>
+    <div class="unit"><div class="num" id="secs">00</div><div class="lbl">Detik</div></div>
+  </div>
+
+  <!-- Gift (shown when done) -->
+  <div class="gift-section" id="giftSection">
+    <div class="gift-text">🎊 Selamat Ulang Tahun! 🎊</div>
+    <a href="game3d.html"><div class="gift-emoji" id="giftBox" title="Klik untuk hadiah kejutan!">🎁</div></a>
+    <div class="gift-hint">✨ Klik kado untuk kejutan! ✨</div>
+  </div>
+</div>
+
+<!-- Taskbar with characters -->
+<div class="taskbar">
+  <div class="taskbar-inner" id="taskbarInner">
+    <div class="ground"></div>
+  </div>
+</div>
+
+<script>
+// ── Balloons (soft pink tones) ──
+const bEls = ['🎈','🎀','🌸','💕','✨','🎊'];
+const bWrap = document.getElementById('balloons');
+function spawnBalloon(){
+  const b = document.createElement('div'); b.className = 'balloon';
+  b.textContent = bEls[Math.floor(Math.random() * bEls.length)];
+  b.style.cssText = `left:${Math.random()*100}%;--ft:${8+Math.random()*9}s;--fd:0s;font-size:${1+Math.random()*1.2}rem`;
+  bWrap.appendChild(b);
+  setTimeout(() => b.remove(), 18000);
+}
+setInterval(spawnBalloon, 2500); spawnBalloon();
+
+// ── Characters (pink palette) ──
+const charDefs = [
+  { type:'walk', color:'#f4a0bc', hatColor:'#e8638c', skinColor:'#ffd5b0', spd:15, delay:0,  scale:1    },
+  { type:'run',  color:'#fde8f0', hatColor:'#e8638c', skinColor:'#ffd5b0', spd:6,  delay:2,  scale:0.9  },
+  { type:'walk', color:'#e8638c', hatColor:'#c44470', skinColor:'#ffe0c8', spd:18, delay:5,  scale:1.05 },
+  { type:'run',  color:'#fac8da', hatColor:'#e8638c', skinColor:'#ffd5b0', spd:4,  delay:1,  scale:0.85 },
+  { type:'walk', color:'#f9d0e0', hatColor:'#d45b80', skinColor:'#ffe0c8', spd:20, delay:8,  scale:1    },
+  { type:'run',  color:'#e8638c', hatColor:'#b83868', skinColor:'#ffd5b0', spd:5,  delay:3,  scale:0.95 },
+  { type:'walk', color:'#f4b8cc', hatColor:'#e8638c', skinColor:'#ffe0c8', spd:12, delay:10, scale:1.1  },
+];
+
+function makeCharSVG(c){
+  const sk = c.skinColor, cl = c.color, hat = c.hatColor;
+  return `<svg viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="16,2 10,16 22,16" fill="${hat}" opacity="0.9"/>
+    <circle cx="16" cy="2" r="2" fill="${hat}"/>
+    <circle cx="16" cy="20" r="7" fill="${sk}"/>
+    <circle cx="13.5" cy="19" r="1.2" fill="#5a2d42"/>
+    <circle cx="18.5" cy="19" r="1.2" fill="#5a2d42"/>
+    <circle cx="13.8" cy="18.7" r="0.5" fill="white"/>
+    <circle cx="18.8" cy="18.7" r="0.5" fill="white"/>
+    <path d="M13 22 Q16 25 19 22" stroke="#c44470" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <circle cx="12" cy="21.5" r="2" fill="#ffb3c1" opacity="0.6"/>
+    <circle cx="20" cy="21.5" r="2" fill="#ffb3c1" opacity="0.6"/>
+    <g class="body-wrap">
+      <rect x="11" y="27" width="10" height="10" rx="3" fill="${cl}"/>
+      <rect x="11" y="33" width="10" height="1.5" fill="${hat}" opacity="0.5"/>
+      <g class="arm-l"><rect x="6" y="27" width="4" height="9" rx="2" fill="${sk}"/></g>
+      <g class="arm-r"><rect x="22" y="27" width="4" height="9" rx="2" fill="${sk}"/></g>
+      <g class="leg-l"><rect x="12" y="37" width="4" height="7" rx="2" fill="${cl}"/><rect x="11" y="42" width="5" height="2" rx="1" fill="#c44470"/></g>
+      <g class="leg-r"><rect x="17" y="37" width="4" height="7" rx="2" fill="${cl}"/><rect x="17" y="42" width="5" height="2" rx="1" fill="#c44470"/></g>
+    </g>
+  </svg>`;
+}
+
+const tb = document.getElementById('taskbarInner');
+charDefs.forEach((c) => {
+  const div = document.createElement('div');
+  div.className = `char ${c.type}`;
+  div.style.cssText = `--spd:${c.spd}s; animation-delay:${c.delay}s; transform:scale(${c.scale}); transform-origin:bottom center;`;
+  div.innerHTML = makeCharSVG(c);
+  tb.appendChild(div);
+});
+
+// ── Countdown (hardcoded: 24 Februari 2026) ──
+const TARGET_DATE = '2026-02-24';
+
+const countdown = document.getElementById('countdownSection');
+const giftSection = document.getElementById('giftSection');
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function setNum(id, val){
+  const el = document.getElementById(id);
+  const v = pad(val);
+  if(el.textContent !== v){ el.textContent = v; el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+}
+
+let wasDone = false;
+function tick(){
+  const target = new Date(TARGET_DATE + 'T00:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if(diff <= 0){
+    setNum('days',0); setNum('hours',0); setNum('mins',0); setNum('secs',0);
+    countdown.style.display = 'none';
+    giftSection.classList.add('show');
+    if(!wasDone){ launchConfetti(); wasDone = true; }
+    return;
+  }
+  wasDone = false;
+  countdown.style.display = 'grid';
+  giftSection.classList.remove('show');
+  setNum('days',  Math.floor(diff / 86400000));
+  setNum('hours', Math.floor((diff % 86400000) / 3600000));
+  setNum('mins',  Math.floor((diff % 3600000) / 60000));
+  setNum('secs',  Math.floor((diff % 60000) / 1000));
+}
+
+setInterval(tick, 1000); tick();
+
+// ── Gift click ──
+document.getElementById('giftBox').addEventListener('click', () => {
+  window.location.href = 'game3d.html';
+});
+
+// ── Confetti (pink palette) ──
+const confettiColors = ['#e8638c','#f4a0bc','#fac8da','#fde8f0','#c44470','#ffb3c1','#f9d0e0'];
+function launchConfetti(){
+  const wrap = document.getElementById('confetti');
+  wrap.innerHTML = '';
+  for(let i = 0; i < 90; i++){
+    const c = document.createElement('div'); c.className = 'c';
+    c.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};
+      width:${6+Math.random()*10}px; height:${6+Math.random()*10}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      --cd:${2+Math.random()*3}s; --cdel:${Math.random()*2}s;`;
+    wrap.appendChild(c);
+  }
+  setTimeout(() => wrap.innerHTML = '', 6000);
+}
+</script>
+</body>
+</html>
