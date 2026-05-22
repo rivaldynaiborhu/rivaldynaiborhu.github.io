@@ -1,566 +1,1909 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Home &mdash; Rivaldy Naiborhu</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="freehtml5.co" /> -->
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rivaldy Naiborhu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
+    [data-theme="dark"] {
+      --bg: #0e0e0e;
+      --bg2: #141414;
+      --surface: #1a1a1a;
+      --border: #242424;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --text-dim: #555;
+      --accent: #f0f0f0;
+      --accent-ink: #0e0e0e;
+      --tag-bg: #1f1f1f;
+      --tag-color: #888;
+      --tetris-bg: #111;
+      --tetris-border: #2a2a2a;
+      --tetris-ghost: rgba(255,255,255,0.05);
+    }
 
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+    [data-theme="light"] {
+      --bg: #f8f6f1;
+      --bg2: #f2f0eb;
+      --surface: #eeecea;
+      --border: #e0ddd7;
+      --text: #1a1a1a;
+      --text-muted: #777;
+      --text-dim: #aaa;
+      --accent: #1a1a1a;
+      --accent-ink: #f8f6f1;
+      --tag-bg: #e8e6e1;
+      --tag-color: #777;
+      --tetris-bg: #f0ede8;
+      --tetris-border: #ddd9d3;
+      --tetris-ghost: rgba(0,0,0,0.04);
+    }
 
-	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 56px;
+      background: var(--bg);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    nav.scrolled {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 56px;
+    }
 
-	</head>
-	<body>
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">	
-	<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image:url(images/cover_bg_3.jpg);" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t js-fullheight">
-						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-							<div class="profile-thumb" style="background: url(images/user-3.jpg);"></div>
-							<h1><span>Rivaldy Naiborhu</span></h1>
-							<h3><span>UX Researcher / Web Developer / UX Designer</span></h3>
-							<p>
-								<ul class="fh5co-social-icons">
-									<li><a href="https://twitter.com/lyfenotfound"><i class="icon-twitter2"></i></a></li>
-									<li><a href="https://www.instagram.com/rivaldynaiborhu/"><i class="icon-instagram2"></i></a></li>
-									<li><a href="https://www.linkedin.com/in/rivaldynaiborhu/"><i class="icon-linkedin2"></i></a></li>
-								</ul>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
 
-	<div id="fh5co-about" class="animate-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>About Me</h2>
-				</div>
-			</div>
-			<div class="row">
-				<!-- <div class="col-md-4">
-					<ul class="info">
-						<li><span class="first-block">Full Name:</span><span class="second-block">Rivaldy Naiborhu</span></li>
-						<li><span class="first-block">Email:</span><span class="second-block">rivaldynaiborhu@gmail.com</span></li>
-						<li><span class="first-block">Website:</span><span class="second-block">rivaldynaiborhu.tech</span></li>
-						<li><span class="first-block">Address:</span><span class="second-block">Indonesia</span></li>
-					</ul>
-				</div> -->
-				<div class="col-md-8 col-md-offset-2 fh5co-heading">
-					<h2>Who am I?</h2>
-					<p>A multidisciplinary IT Fresh Graduate who has a strong ability in Product Development and Critical in solving problems with various approaches. I am looking for a position to learn and make a positive impact on the company.</p>
-					<p><a href="CV/CV.pdf" class="btn btn-default btn-lg">Download CV (PDF)</a></p>
-						<ul class="fh5co-social-icons">
-							<li><a href="https://twitter.com/lyfenotfound"><i class="icon-twitter2"></i></a></li>
-							<li><a href="https://www.instagram.com/rivaldynaiborhu/"><i class="icon-instagram2"></i></a></li>
-							<li><a href="https://www.linkedin.com/in/rivaldynaiborhu/"><i class="icon-linkedin2"></i></a></li>
-						</ul>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
 
-	<div id="fh5co-resume" class="fh5co-bg-color">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>My Resume</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-md-offset-0">
-					<ul class="timeline">
-						<li class="timeline-heading text-center animate-box">
-							<div><h3>Work Experience</h3></div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">UX Researcher</h3>
-									<span class="company">PT Vertika Technologies Nusantara (Rey.Id) <br> Apr 2023 - Aug 2023</span>
-								</div>
-								<div class="timeline-body">
-									<p>Designed a research plan before conducting the research. Conducting research using various methods such as usability testing and interviews with respondents to evaluate the interface and unearth insights. Conducting research through interview methods with respondents to gain insights into user experiences with the chat application feature. Synthesizing findings and providing recommendations for development to stakeholders.</p>
-								</div>
-							</div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">IT Assistant Lecturer</h3>
-									<span class="company">Universitas Gadjah Mada <br> Aug 2022 - Jan 2023</span>
-								</div>
-								<div class="timeline-body">
-									<p>Assisted and mentoring two final-year students in completing their final thesis. Providing assistance in technology selection, offering advice, and helping to overcome technical issues in the field of UX Research and Website Development, as well as monitoring the thesis development and writing process.</p>
-								</div>
-							</div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">UX Researcher</h3>
-									<span class="company">SHAREit Group <br> Oct 2022 - Nov 2022</span>
-								</div>
-								<div class="timeline-body">
-									<p>Conducted field research, including surveys, observations, and in-depth interviews on the "Indonesian Smartphone User Touch System," in five regions in Yogyakarta, with a research focus on Gunung Kidul Regency, to identify user behaviors in using smartphones across five different categories. Synthesizing data by analyzing the interview results to gain new insights and provide recommendations related to product development.</p>
-								</div>
-							</div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">UX Designer</h3>
-									<span class="company">Telkom Indonesia <br> Feb 2021 - Mar 2021</span>
-								</div>
-								<div class="timeline-body">
-									<p>Conducted research using in-depth interview methods, designing user interface based on user problems for the website, and interacting with various stakeholders, successfully solving officer task monitoring issues and improving productivity in the Shared Service of Finance division.</p>
-								</div>
-							</div>
-						</li>
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
 
-						<br>
-						<li class="timeline-heading text-center animate-box">
-							<div><h3>Education/Certification</h3></div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Bachelor Degree</h3>
-									<span class="company">Universitas Gadjah Mada <br> Aug 2018 - Aug 2022</span>
-								</div>
-								<div class="timeline-body">
-									<p>Actively participated in various departmental, campus, and national-level activities in the field of IT, as well as serving as a coordinator for national-level events.</p>
-								</div>
-							</div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Google UX Design Professional Certificate</h3>
-									<span class="company">Google <br> Nov 2022</span>
-								</div>
-								<!-- <div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</div> -->
-							</div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Google Data Analytics Certificate</h3>
-									<span class="company">Google <br> Oct 2022</span>
-								</div>
-								<!-- <div class="timeline-body">
-									<p>Actively participating in various departmental, campus, and national-level activities in the field of IT, as well as serving as a coordinator for national-level events.</p>
-								</div> -->
-							</div>
-						</li>
-			    	</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
 
-	<div id="fh5co-features" class="animate-box">
-		<div class="container">
-			<div class="services-padding">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>My Services</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4 text-center">
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-paintbrush"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>UX Design</h3>
-								<p>Engage in user-centered UX design development.</p>
-							</div>
-						</div>
-					</div>
+    /* THEME TOGGLE */
+    .theme-toggle {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover {
+      background: var(--surface);
+      border-color: var(--text-muted);
+    }
+    .theme-toggle svg {
+      width: 15px; height: 15px;
+      stroke: var(--text-muted);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      transition: stroke 0.2s;
+    }
+    .theme-toggle:hover svg { stroke: var(--text); }
+    .icon-moon, .icon-sun { transition: opacity 0.2s; }
+    [data-theme="dark"] .icon-sun { display: none; }
+    [data-theme="light"] .icon-moon { display: none; }
 
-					<div class="col-md-4 text-center">
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-briefcase"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>UX Research</h3>
-								<p>Conductresearch design, research, data synthesis, and decision-making for business needs.</p>
-							</div>
-						</div>
+    .nav-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-menu-btn span {
+      display: block;
+      width: 22px; height: 1px;
+      background: var(--text);
+      transition: all 0.25s;
+    }
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--text-muted); }
+    .nav-mobile-close {
+      position: absolute;
+      top: 28px; right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--text-muted);
+    }
 
-					</div>
-					<div class="col-md-4 text-center">
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-search"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Web Development</h3>
-								<p>Develop a website with WordPress integrated to meet consumer needs.</p>
-							</div>
-						</div>
-					</div>
-				</div>
+    /* SECTIONS */
+    section { position: relative; }
 
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
 
-				<!-- <div class="row">
-					<div class="col-md-4 text-center">
+    /* HERO */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+    }
 
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-bargraph"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Web Developent</h3>
-								<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
-							</div>
-						</div>
+    .hero-inner {
+      width: 100%;
+      padding: 80px 0 120px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 60px;
+      align-items: center;
+    }
 
-					</div>
+    .hero-left {}
 
-					<div class="col-md-4 text-center">
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-genius"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Web Marketing</h3>
-								<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
-							</div>
-						</div>
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--text-dim);
+    }
 
-					</div>
-					<div class="col-md-4 text-center">
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-chat"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Support</h3>
-								<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			</div>
-		</div>
-	</div>
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(48px, 6vw, 90px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
 
-	
+    .hero-name em {
+      font-style: italic;
+      color: var(--text-muted);
+    }
 
-	<div id="fh5co-blog">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Post on Medium</h2>
-					<p>Several articles I've written on Mediums.</p>
-				</div>
-			</div>
+    .hero-bottom {
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.35s forwards;
+    }
 
-			<div class="row" id="article-container"></div>
-			<style>
-				 #article-container{
-					align-items: center;
-				 }
+    .hero-desc {
+      max-width: 400px;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
 
-				.article .blog-bg {
-				display: block;
-				margin-top: 50px;
-				width: 100%;
-				background-size: cover;
-				background-position: center center;
-				background-repeat: no-repeat;
-				position: relative;
-				border-radius: 8px;
-				height: 300px;
-				}
-				@media screen and (max-width: 768px) {
-				.article .blog-bg {
-					height: 400px;
-				}
-				}
-				@media screen and (max-width: 480px) {
-				.article .blog-bg {
-					height: 270px;
-				}
-				}
-			  </style>
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
 
-			<!-- <div  class="row">
-				<div class="col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-bg" style="background-image: url(images/portfolio-2.jpg);"></a>
-						<div class="blog-text">
-							<span class="posted_on">Mar. 15th 2016</span>
-							<h3><a href="#">Surfing at Philippines</a></h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-							<ul class="stuff">
-								<li><i class="icon-heart2"></i>249</li>
-								<li><i class="icon-eye2"></i>308</li>
-								<li><a href="#">Read More<i class="icon-arrow-right22"></i></a></li>
-							</ul>
-						</div> 
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-bg" style="background-image: url(images/portfolio-2.jpg);"></a>
-						<div class="blog-text">
-							<span class="posted_on">Mar. 15th 2016</span>
-							<h3><a href="#">Surfing at Philippines</a></h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-							<ul class="stuff">
-								<li><i class="icon-heart2"></i>249</li>
-								<li><i class="icon-eye2"></i>308</li>
-								<li><a href="#">Read More<i class="icon-arrow-right22"></i></a></li>
-							</ul>
-						</div> 
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-bg" style="background-image: url(images/portfolio-3.jpg);"></a>
-						<div class="blog-text">
-							<span class="posted_on">Mar. 15th 2016</span>
-							<h3><a href="#">Capture Living On Uderwater</a></h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-							<ul class="stuff">
-								<li><i class="icon-heart2"></i>249</li>
-								<li><i class="icon-eye2"></i>308</li>
-								<li><a href="#">Read More<i class="icon-arrow-right22"></i></a></li>
-							</ul>
-						</div> 
-					</div>
-				</div>
-			</div> -->
-		</div>
-	</div>
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border-radius: 100px;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: var(--accent-ink);
+      border: 1px solid var(--text);
+    }
+    .btn-primary:hover { opacity: 0.8; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
 
-	<!-- <div id="fh5co-work" class="fh5co-bg-dark">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Work</h2>
-					<p>Coming Soon</p>
-				</div>
-			</div> -->
-			<!-- <div class="row">
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-1.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Illustration</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-2.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Brading</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-3.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Illustration</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-4.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Design</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-5.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Website</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-6.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Illustration</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-7.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Brading</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(images/portfolio-8.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Illustration</span>
-						</div>
-					</a>
-				</div>
-			</div> -->
-		</div>
-	</div>
-	
-	<div id="fh5co-started" class="fh5co-bg-dark">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Hire Me!</h2>
-					<p>Interested in working together?</p>
-					<p><a href="mailto:rivaldynaiborhu@gmail.com" class="btn btn-default btn-lg">Contact Me</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
+    /* =====================
+       TETRIS WIDGET
+    ===================== */
+    .tetris-widget {
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--tetris-bg);
+      transition: background var(--transition), border-color var(--transition);
+      position: relative;
+    }
 
-	<!-- <div id="fh5co-consult">
-		<div class="video fh5co-video" style="background-image: url(images/cover_bg_1.jpg);">
-			<div class="overlay"></div>
-		</div>
-		<div class="choose animate-box">
-			<h2>Contact</h2>
-			<form action="#">
-				<div class="row form-group">
-					<div class="col-md-6">
-						<input type="text" id="fname" class="form-control" placeholder="Your firstname">
-					</div>
-				</div>
-				<div class="row form-group">
-					<div class="col-md-6">
-						<input type="text" id="lname" class="form-control" placeholder="Your lastname">
-					</div>
-				</div>
+    .tetris-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
 
-				<div class="row form-group">
-					<div class="col-md-12">
-						<input type="text" id="email" class="form-control" placeholder="Your email address">
-					</div>
-				</div>
+    .tetris-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
-				<div class="row form-group">
-					<div class="col-md-12">
-						<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
-					</div>
-				</div>
+    .tetris-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
 
-				<div class="row form-group">
-					<div class="col-md-12">
-						<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Send Message" class="btn btn-primary">
-				</div>
+    .tetris-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .tetris-btn:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
 
-			</form>	
-		</div>
-	</div> -->
+    .tetris-body {
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
 
-	<!-- <div id="map" class="fh5co-map"></div> -->
-	<!-- <iframe id="map" class="fh5co-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d38687.776500162356!2d136.0700525397641!3d-1.1596177104099823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x68038fde179b9769%3A0xc70aecfa577b3fd5!2sNaiborhu%20Kost!5e0!3m2!1sen!2sid!4v1698129164538!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-	</div>
-	
-	<div id="fh5co-footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<p>&copy; 2023. All Rights Reserved.</p>
-				</div>
-			</div>
-		</div>
-	</div>
+    .tetris-canvas-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
-	</div>
-	
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Easy PieChart -->
-	<script src="js/jquery.easypiechart.min.js"></script>
-	<!-- Google Map -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="js/google_map.js"></script>
-	
-	<!-- Main -->
-	<script src="js/main.js"></script>
-	<script src="js/medium.js"></script>
+    #tetrisCanvas {
+      display: block;
+      border-radius: 6px;
+    }
 
-	</body>
+    .tetris-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tetris-info-block {
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+    }
+
+    .tetris-info-label {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .tetris-info-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .tetris-next-canvas {
+      display: block;
+      border-radius: 4px;
+    }
+
+    .tetris-controls-hint {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .hint-key {
+      font-size: 9px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hint-key kbd {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1px 4px;
+      font-size: 9px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-muted);
+    }
+
+    .tetris-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+      border-radius: inherit;
+    }
+    [data-theme="light"] .tetris-overlay { background: rgba(240,237,232,0.8); }
+
+    .tetris-overlay-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      text-align: center;
+    }
+    .tetris-overlay-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .tetris-start-btn {
+      margin-top: 6px;
+      background: var(--text);
+      color: var(--accent-ink);
+      border: none;
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 12px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .tetris-start-btn:hover { opacity: 0.8; }
+
+    /* FULLSCREEN MODAL */
+    .tetris-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+    }
+    .tetris-modal.open { display: flex; }
+
+    .tetris-modal-inner {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      max-height: 95vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tetris-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .tetris-modal-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .tetris-modal-close {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .tetris-modal-close:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .tetris-modal-body {
+      padding: 24px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      overflow: auto;
+    }
+
+    .tetris-modal-side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 120px;
+    }
+
+    .tetris-modal-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .tetris-modal-info .tetris-info-label {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+    .tetris-modal-info .tetris-info-value {
+      font-size: 28px;
+    }
+
+    .tetris-keys {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tetris-keys .tetris-info-label { margin-bottom: 6px; }
+    .key-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .key-row kbd {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 10px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+    }
+
+    /* SECTION DIVIDER */
+    .section-line {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      transition: background var(--transition);
+    }
+
+    /* SECTION HEADER */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 80px 0 52px;
+      gap: 20px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--text-muted); }
+    .section-count {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    /* PROJECTS */
+    #projects { background: var(--bg2); transition: background var(--transition); }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: start;
+      gap: 24px 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .project-row::before {
+      content: '';
+      position: absolute;
+      inset: 0 -56px;
+      background: var(--surface);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .project-row:hover::before { opacity: 1; }
+    .project-row > * { position: relative; z-index: 1; }
+
+    .project-num {
+      font-size: 11px;
+      color: var(--text-dim);
+      padding-top: 4px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .project-row:hover .project-title { color: var(--text); }
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 520px;
+      margin-bottom: 14px;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 11px;
+      color: var(--tag-color);
+      background: var(--tag-bg);
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .project-arrow {
+      font-size: 16px;
+      color: var(--text-dim);
+      padding-top: 4px;
+      transition: all 0.25s;
+    }
+    .project-row:hover .project-arrow {
+      color: var(--text);
+      transform: translate(3px, -3px);
+    }
+
+    /* =====================
+       EXPERIENCE SECTION
+    ===================== */
+    #experience { background: var(--bg); transition: background var(--transition); }
+
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 80px;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px 48px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .exp-item:first-child { border-top: 1px solid var(--border); }
+
+    .exp-left {}
+
+    .exp-period {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+
+    .exp-duration {
+      font-size: 11px;
+      color: var(--text-dim);
+      opacity: 0.6;
+    }
+
+    .exp-right {}
+
+    .exp-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .exp-role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .exp-badge {
+      font-size: 10px;
+      color: var(--tag-color);
+      background: var(--tag-bg);
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+    .exp-badge.current {
+      color: #4ade80;
+      background: rgba(74, 222, 128, 0.1);
+    }
+
+    .exp-company {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exp-company-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .exp-location {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .exp-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 18px;
+      max-width: 560px;
+    }
+
+    .exp-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* BLOG */
+    #blog { background: var(--bg2); transition: background var(--transition); }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 80px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .blog-card {
+      background: var(--bg2);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .blog-card:hover { background: var(--surface); }
+
+    .blog-date {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .blog-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 17px;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .blog-excerpt {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-link {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    .blog-card:hover .blog-link { color: var(--text); }
+
+    .blog-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      padding: 60px 0;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--bg); transition: background var(--transition); }
+
+    .socials-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 64px;
+    }
+
+    .social-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+    .social-row:first-child { border-top: 1px solid var(--border); }
+    .social-row:hover { padding-left: 12px; }
+
+    .social-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .social-platform {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: 80px;
+    }
+    .social-handle {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .social-arrow {
+      font-size: 14px;
+      color: var(--text-dim);
+      transition: all 0.25s;
+    }
+    .social-row:hover .social-arrow {
+      color: var(--text);
+      transform: translate(3px, -3px);
+    }
+
+    .contact-cta {
+      text-align: center;
+      padding: 64px 0 80px;
+    }
+    .cta-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+      line-height: 1.15;
+    }
+    .cta-text em { font-style: italic; color: var(--text-muted); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .footer-left {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .status-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #de4a4a;
+      animation: pulse 2.5s ease infinite;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .tetris-widget {
+        max-width: 360px;
+      }
+    }
+    @media (max-width: 860px) {
+      nav { padding: 24px 28px; }
+      nav.scrolled { padding: 16px 28px; }
+      .nav-links { display: none; }
+      .nav-menu-btn { display: flex; }
+      .container { padding: 0 28px; }
+      footer { padding: 24px 28px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .project-row { grid-template-columns: 36px 1fr; }
+      .project-arrow { display: none; }
+      .project-row::before { inset: 0 -28px; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .exp-period { margin-bottom: 0; }
+    }
+    @media (max-width: 560px) {
+      .hero-name { font-size: 48px; }
+      .hero-cta { flex-direction: column; width: 100%; }
+      .btn { justify-content: center; }
+      .section-head { flex-direction: column; padding: 60px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#home" class="nav-logo">Rivaldy Naiborhu</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="nav-mobile" id="mobileNav">
+    <button class="nav-mobile-close" id="mobileClose">✕</button>
+    <a href="#home" onclick="closeMobile()">Home</a>
+    <a href="#projects" onclick="closeMobile()">Projects</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#blog" onclick="closeMobile()">Blog</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-eyebrow">Not Available for work <br> Open for discussion</div>
+          <h1 class="hero-name">
+            Rivaldy<br><em>Naiborhu</em>
+          </h1>
+          <div class="hero-bottom">
+            <p class="hero-desc">
+              Bridging banking and technology into seamless digital solutions.
+            </p>
+            <div class="hero-cta">
+              <a href="#projects" class="btn btn-primary">Projects</a>
+              <a href="#contact" class="btn btn-ghost">Contact</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TETRIS WIDGET -->
+        <div class="tetris-widget" id="tetrisWidget">
+          <div class="tetris-header">
+            <span class="tetris-label">Mini Tetris</span>
+            <div class="tetris-actions">
+              <button class="tetris-btn" id="widgetRestartBtn">↺ Restart</button>
+              <button class="tetris-btn" id="fullscreenBtn">⛶ Fullscreen</button>
+            </div>
+          </div>
+          <div class="tetris-body">
+            <div class="tetris-canvas-wrap" style="position:relative;">
+              <canvas id="tetrisCanvas" width="120" height="240"></canvas>
+              <div class="tetris-overlay" id="widgetOverlay">
+                <div class="tetris-overlay-title">Tetris</div>
+                <div class="tetris-overlay-sub">Take a break & play!</div>
+                <button class="tetris-start-btn" id="widgetStartBtn">Start Game</button>
+              </div>
+            </div>
+            <div class="tetris-side">
+              <div class="tetris-info-block">
+                <div class="tetris-info-label">Score</div>
+                <div class="tetris-info-value" id="widgetScore">0</div>
+              </div>
+              <div class="tetris-info-block">
+                <div class="tetris-info-label">Lines</div>
+                <div class="tetris-info-value" id="widgetLines">0</div>
+              </div>
+              <div class="tetris-info-block">
+                <div class="tetris-info-label">Next</div>
+                <canvas class="tetris-next-canvas" id="widgetNextCanvas" width="60" height="60"></canvas>
+              </div>
+              <div class="tetris-controls-hint">
+                <div class="hint-key"><kbd>←→</kbd> Move</div>
+                <div class="hint-key"><kbd>↑</kbd> Rotate</div>
+                <div class="hint-key"><kbd>↓</kbd> Soft drop</div>
+                <div class="hint-key"><kbd>Space</kbd> Drop</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TETRIS FULLSCREEN MODAL -->
+  <div class="tetris-modal" id="tetrisModal">
+    <div class="tetris-modal-inner">
+      <div class="tetris-modal-header">
+        <span class="tetris-modal-title">Tetris</span>
+        <button class="tetris-modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="tetris-modal-body">
+        <div style="position:relative; flex-shrink:0;">
+          <canvas id="tetrisModalCanvas" width="240" height="480"></canvas>
+          <div class="tetris-overlay" id="modalOverlay">
+            <div class="tetris-overlay-title">Tetris</div>
+            <div class="tetris-overlay-sub" id="modalOverlaySub">Press Start to play</div>
+            <button class="tetris-start-btn" id="modalStartBtn">Start Game</button>
+          </div>
+        </div>
+        <div class="tetris-modal-side">
+          <div class="tetris-modal-info">
+            <div class="tetris-info-label">Score</div>
+            <div class="tetris-info-value" id="modalScore">0</div>
+          </div>
+          <div class="tetris-modal-info">
+            <div class="tetris-info-label">Level</div>
+            <div class="tetris-info-value" id="modalLevel">1</div>
+          </div>
+          <div class="tetris-modal-info">
+            <div class="tetris-info-label">Lines</div>
+            <div class="tetris-info-value" id="modalLines">0</div>
+          </div>
+          <div class="tetris-modal-info">
+            <div class="tetris-info-label">Next</div>
+            <canvas id="modalNextCanvas" width="100" height="100"></canvas>
+          </div>
+          <div class="tetris-keys">
+            <div class="tetris-info-label">Controls</div>
+            <div class="key-row"><span>Move Left</span><kbd>←</kbd></div>
+            <div class="key-row"><span>Move Right</span><kbd>→</kbd></div>
+            <div class="key-row"><span>Rotate</span><kbd>↑</kbd></div>
+            <div class="key-row"><span>Soft Drop</span><kbd>↓</kbd></div>
+            <div class="key-row"><span>Hard Drop</span><kbd>Space</kbd></div>
+            <div class="key-row"><span>Pause</span><kbd>P</kbd></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-line"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">Selected <em>Projects</em></h2>
+        <span class="section-count">6 projects</span>
+      </div>
+      <div class="projects-list">
+
+        <div class="project-row reveal" onclick="window.location.href='https://atfponkel.my.id'">
+          <div class="project-num">01</div>
+          <div class="project-main">
+            <div class="project-title">Leading Indicator Web App</div>
+            <p class="project-desc">Developed and managed 'Leading Indicator', an internal data visualization platform designed to monitor performance gaps, track strategic targets, and support data-driven decision making.</p>
+            <div class="project-tags">
+              <span class="tag">html</span><span class="tag">css</span><span class="tag">js</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-row reveal" onclick="window.location.href='https://rivaldynaiborhu.github.io/kezia27th/'">
+          <div class="project-num">02</div>
+          <div class="project-main">
+            <div class="project-title">Kezia's 27th Birthday</div>
+            <p class="project-desc">A personalized 27th birthday website for Kezia, combining interactive design and storytelling to create a memorable digital experience.</p>
+            <div class="project-tags">
+              <span class="tag">html</span><span class="tag">css</span><span class="tag">js</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-row reveal" onclick="window.location.href='https://rivaldynaiborhu.github.io/kezia27th/'">
+          <div class="project-num">03</div>
+          <div class="project-main">
+            <div class="project-title">Filing System</div>
+            <p class="project-desc">Web-based document archiving system using Native PHP and SQL, deployed locally via XAMPP and published online using Cloudflare Tunnel.</p>
+            <div class="project-tags">
+              <span class="tag">PHP Native</span><span class="tag">html</span><span class="tag">MySQL</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-row reveal" onclick="window.location.href='https://rivaldynaiborhu.github.io/kezia26th/'">
+          <div class="project-num">04</div>
+          <div class="project-main">
+            <div class="project-title">Kezia's 26th Birthday</div>
+            <p class="project-desc">Personalized birthday website combining interactive design and storytelling for a memorable digital experience.</p>
+            <div class="project-tags">
+              <span class="tag">html</span><span class="tag">css</span><span class="tag">js</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-row reveal" onclick="window.location.href='https://rivaldynaiborhu.github.io/kezia25th/'">
+          <div class="project-num">05</div>
+          <div class="project-main">
+            <div class="project-title">Kezia's 25th Birthday</div>
+            <p class="project-desc">Personalized birthday website combining interactive design and storytelling for a memorable digital experience.</p>
+            <div class="project-tags">
+              <span class="tag">html</span><span class="tag">css</span><span class="tag">js</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <div class="project-row reveal" onclick="window.location.href='https://rivaldynaiborhu.github.io/kezia24th/'">
+          <div class="project-num">06</div>
+          <div class="project-main">
+            <div class="project-title">Kezia's 24th Birthday</div>
+            <p class="project-desc">Personalized birthday website combining interactive design and storytelling for a memorable digital experience.</p>
+            <div class="project-tags">
+              <span class="tag">html</span><span class="tag">css</span><span class="tag">js</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-line"></div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">Work <em>Experience</em></h2>
+        <span class="section-count">4 positions</span>
+      </div>
+      <div class="experience-list">
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-period">Mar 2024 — Present</div>
+            <div class="exp-duration">2 yr 3 mos</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-role">Officer Retail Funding & Solutions</div>
+              <span class="exp-badge current">Current</span>
+            </div>
+            <div class="exp-company">
+              PT Bank Mandiri (Persero) Tbk
+              <span class="exp-company-dot"></span>
+              <span class="exp-location">Jakarta · Full-time</span>
+            </div>
+            <p class="exp-desc">
+              Responsible for managing, analyzing, and visualizing business data to support strategic decision-making. Deliver insights and performance reports to stakeholders through data-driven analysis and interactive reporting solutions.
+            </p>
+            <div class="exp-skills">
+              <span class="tag">Microsoft Tools</span><span class="tag">Tableu</span><span class="tag">SQL</span><span class="tag">Looker Studio</span><span class="tag">etc</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-period">Apr 2023 — Aug 2023</div>
+            <div class="exp-duration">5 mos</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-role">UX Researcher</div>
+              <span class="exp-badge">Contract</span>
+            </div>
+            <div class="exp-company">
+              PT Vertika Technologies Nusantara (Rey)
+              <span class="exp-company-dot"></span>
+              <span class="exp-location">Jakarta · Contract</span>
+            </div>
+            <p class="exp-desc">
+              Planned and conducted user research through usability testing and in-depth interviews to uncover user insights and improve product experience. Synthesized research findings into strategic recommendations.
+            </p>
+            <div class="exp-skills">
+              <span class="tag">SUS</span><span class="tag">Usability Testing</span><span class="tag">Data Visualization</span><span class="tag">Figma</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-period">Aug 2022 — Jan 2023</div>
+            <div class="exp-duration">6 mos</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-role">Assitant Lecturer</div>
+              <span class="exp-badge">Contract</span>
+            </div>
+            <div class="exp-company">
+              Universitas Gadjah Mada
+              <span class="exp-company-dot"></span>
+              <span class="exp-location">Jakarta · Contract</span>
+            </div>
+            <p class="exp-desc">
+              Assisted students in completing academic research while supporting product planning, feature development, and application optimization. Provided guidance on technology stack selection, UX, and web development.
+            </p>
+            <div class="exp-skills">
+              <span class="tag">React Js</span><span class="tag">Strapi IO</span><span class="tag">Mongo DB</span><span class="tag">Figma</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-period">Oct 2022 — Nov 2022</div>
+            <div class="exp-duration">2 mos</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-role">UX Researcher</div>
+              <span class="exp-badge">Internship</span>
+            </div>
+            <div class="exp-company">
+             Smart Media4U Technology Pte. Ltd (SHAREit Group)
+              <span class="exp-company-dot"></span>
+              <span class="exp-location">Yogyakarta · Internship</span>
+            </div>
+            <p class="exp-desc">
+              Conducted field research through surveys, observations, and interviews to understand user behavior and validate product hypotheses. Analyzed research findings and delivered strategic recommendations to stakeholders.
+            </p>
+            <div class="exp-skills">
+              <span class="tag">Interviews</span><span class="tag">Usability Testing</span><span class="tag">etc</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-period">Feb 2021 — Mar 2021</div>
+            <div class="exp-duration">2 mos</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-role">UX Designer</div>
+              <span class="exp-badge">Internship</span>
+            </div>
+            <div class="exp-company">
+             PT Telkom Indonesia (Persero) Tbk
+              <span class="exp-company-dot"></span>
+              <span class="exp-location">Remote · Internship</span>
+            </div>
+            <p class="exp-desc">
+             Conducted research using in-depth interview method also synthesize information to uncover user berhavior. Created Website user interface design based on user pain points and communicate with all stakeholders to solved problems in monitoring employee tasks and increased company productivity in the Shared Service Operation Finance divison
+            </p>
+            <div class="exp-skills">
+              <span class="tag">Interviews</span><span class="tag">Usability Testing</span><span class="tag">etc</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-line"></div>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">Articles <em>& Blogs</em></h2>
+        <span class="section-count">Medium Articles</span>
+      </div>
+      <div class="blog-grid" id="blogGrid">
+        <div class="blog-loading">Loading articles…</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-line"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">Find <em>Me</em></h2>
+      </div>
+
+      <div class="socials-list reveal">
+        <a href="https://linkedin.com/in/rivaldynaiborhu" target="_blank" class="social-row">
+          <div class="social-left">
+            <span class="social-platform">LinkedIn</span>
+            <span class="social-handle">Rivaldy Naiborhu</span>
+          </div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a href="https://instagram.com/rivaldynaiborhu" target="_blank" class="social-row">
+          <div class="social-left">
+            <span class="social-platform">Instagram</span>
+            <span class="social-handle">@rivaldynaiborhu</span>
+          </div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a href="https://github.com/rivaldynaiborhu" target="_blank" class="social-row">
+          <div class="social-left">
+            <span class="social-platform">GitHub</span>
+            <span class="social-handle">rivaldynaiborhu</span>
+          </div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a href="https://medium.com/@rivaldynaiborhu" target="_blank" class="social-row">
+          <div class="social-left">
+            <span class="social-platform">Medium</span>
+            <span class="social-handle">@rivaldynaiborhu</span>
+          </div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a href="mailto:rivaldynaiborhu@gmail.com" class="social-row">
+          <div class="social-left">
+            <span class="social-platform">Email</span>
+            <span class="social-handle">rivaldynaiborhu@gmail.com</span>
+          </div>
+          <span class="social-arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="contact-cta reveal">
+        <p class="cta-text">Ready <em>to Collaborate?</em></p>
+        <a href="mailto:rivaldynaiborhu@gmail.com" class="btn btn-primary">Send Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">© 2026 Rivaldy Naiborhu</div>
+    <div class="footer-right">
+      <div class="status-dot"></div>
+      Not Available for work
+    </div>
+  </footer>
+
+  <script>
+    // ========================
+    // THEME TOGGLE
+    // ========================
+    const html = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', saved);
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      // Redraw tetris boards after theme change
+      if (widgetGame) widgetGame.draw();
+      if (modalGame) modalGame.draw();
+    });
+
+    // NAV SCROLL
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // MOBILE NAV
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileClose = document.getElementById('mobileClose');
+    menuBtn.addEventListener('click', () => mobileNav.classList.add('open'));
+    mobileClose.addEventListener('click', closeMobile);
+    function closeMobile() { mobileNav.classList.remove('open'); }
+
+    // ========================
+    // TETRIS ENGINE
+    // ========================
+    const PIECES = [
+      { shape: [[1,1,1,1]], color: '#38bdf8' },           // I
+      { shape: [[1,1],[1,1]], color: '#fbbf24' },          // O
+      { shape: [[0,1,0],[1,1,1]], color: '#a78bfa' },      // T
+      { shape: [[1,0],[1,0],[1,1]], color: '#fb923c' },    // L
+      { shape: [[0,1],[0,1],[1,1]], color: '#60a5fa' },    // J
+      { shape: [[0,1,1],[1,1,0]], color: '#4ade80' },      // S
+      { shape: [[1,1,0],[0,1,1]], color: '#f87171' },      // Z
+    ];
+
+    function rotatePiece(shape) {
+      const rows = shape.length, cols = shape[0].length;
+      const rotated = Array.from({ length: cols }, () => Array(rows).fill(0));
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++)
+          rotated[c][rows - 1 - r] = shape[r][c];
+      return rotated;
+    }
+
+    function randomPiece() {
+      const p = PIECES[Math.floor(Math.random() * PIECES.length)];
+      return { shape: p.shape.map(r => [...r]), color: p.color };
+    }
+
+    class TetrisGame {
+      constructor(canvas, nextCanvas, scoreEl, linesEl, levelEl, overlayEl, cellSize) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.nextCanvas = nextCanvas;
+        this.nextCtx = nextCanvas ? nextCanvas.getContext('2d') : null;
+        this.scoreEl = scoreEl;
+        this.linesEl = linesEl;
+        this.levelEl = levelEl;
+        this.overlayEl = overlayEl;
+        this.CELL = cellSize;
+        this.COLS = Math.floor(canvas.width / cellSize);
+        this.ROWS = Math.floor(canvas.height / cellSize);
+        this.reset();
+        this.running = false;
+        this.paused = false;
+        this.gameOver = false;
+        this.animId = null;
+      }
+
+      reset() {
+        this.board = Array.from({ length: this.ROWS }, () => Array(this.COLS).fill(null));
+        this.score = 0;
+        this.lines = 0;
+        this.level = 1;
+        this.current = null;
+        this.next = randomPiece();
+        this.dropCounter = 0;
+        this.lastTime = 0;
+        this.gameOver = false;
+        this.paused = false;
+        this.updateUI();
+      }
+
+      spawnPiece() {
+        this.current = this.next;
+        this.next = randomPiece();
+        this.current.x = Math.floor((this.COLS - this.current.shape[0].length) / 2);
+        this.current.y = 0;
+        if (this.collides(this.current.shape, this.current.x, this.current.y)) {
+          this.gameOver = true;
+          this.running = false;
+          cancelAnimationFrame(this.animId);
+          this.showOverlay('Game Over', `Score: ${this.score}`);
+        }
+        this.drawNext();
+      }
+
+      collides(shape, ox, oy) {
+        for (let r = 0; r < shape.length; r++)
+          for (let c = 0; c < shape[r].length; c++)
+            if (shape[r][c]) {
+              const nx = ox + c, ny = oy + r;
+              if (nx < 0 || nx >= this.COLS || ny >= this.ROWS) return true;
+              if (ny >= 0 && this.board[ny][nx]) return true;
+            }
+        return false;
+      }
+
+      lock() {
+        const { shape, color, x, y } = this.current;
+        for (let r = 0; r < shape.length; r++)
+          for (let c = 0; c < shape[r].length; c++)
+            if (shape[r][c] && y + r >= 0)
+              this.board[y + r][x + c] = color;
+        this.clearLines();
+        this.spawnPiece();
+      }
+
+      clearLines() {
+        let cleared = 0;
+        for (let r = this.ROWS - 1; r >= 0; ) {
+          if (this.board[r].every(c => c !== null)) {
+            this.board.splice(r, 1);
+            this.board.unshift(Array(this.COLS).fill(null));
+            cleared++;
+          } else r--;
+        }
+        if (cleared) {
+          const pts = [0, 100, 300, 500, 800];
+          this.score += (pts[cleared] || 800) * this.level;
+          this.lines += cleared;
+          this.level = Math.floor(this.lines / 10) + 1;
+          this.updateUI();
+        }
+      }
+
+      moveLeft()  { if (!this.collides(this.current.shape, this.current.x - 1, this.current.y)) this.current.x--; this.draw(); }
+      moveRight() { if (!this.collides(this.current.shape, this.current.x + 1, this.current.y)) this.current.x++; this.draw(); }
+      rotate() {
+        const rot = rotatePiece(this.current.shape);
+        let kick = 0;
+        if (this.collides(rot, this.current.x, this.current.y)) kick = 1;
+        if (this.collides(rot, this.current.x + kick, this.current.y)) kick = -1;
+        if (!this.collides(rot, this.current.x + kick, this.current.y)) {
+          this.current.shape = rot;
+          this.current.x += kick;
+        }
+        this.draw();
+      }
+      softDrop() {
+        if (!this.collides(this.current.shape, this.current.x, this.current.y + 1)) {
+          this.current.y++;
+          this.dropCounter = 0;
+        } else this.lock();
+        this.draw();
+      }
+      hardDrop() {
+        while (!this.collides(this.current.shape, this.current.x, this.current.y + 1))
+          this.current.y++;
+        this.lock();
+        this.draw();
+      }
+
+      ghostY() {
+        let gy = this.current.y;
+        while (!this.collides(this.current.shape, this.current.x, gy + 1)) gy++;
+        return gy;
+      }
+
+      dropSpeed() { return Math.max(100, 800 - (this.level - 1) * 70); }
+
+      update(time = 0) {
+        if (!this.running || this.paused || this.gameOver) return;
+        const delta = time - this.lastTime;
+        this.lastTime = time;
+        this.dropCounter += delta;
+        if (this.dropCounter > this.dropSpeed()) {
+          this.softDrop();
+          this.dropCounter = 0;
+        }
+        this.draw();
+        this.animId = requestAnimationFrame(t => this.update(t));
+      }
+
+      start() {
+        this.reset();
+        this.running = true;
+        this.spawnPiece();
+        this.hideOverlay();
+        this.lastTime = performance.now();
+        this.animId = requestAnimationFrame(t => this.update(t));
+      }
+
+      pause() {
+        if (!this.running || this.gameOver) return;
+        this.paused = !this.paused;
+        if (!this.paused) {
+          this.lastTime = performance.now();
+          this.animId = requestAnimationFrame(t => this.update(t));
+        }
+      }
+
+      stopGame() {
+        this.running = false;
+        this.gameOver = true;
+        cancelAnimationFrame(this.animId);
+      }
+
+      draw() {
+        const ctx = this.ctx;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        const bgColor = isDark ? '#111' : '#f0ede8';
+        const gridColor = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)';
+
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Grid
+        ctx.strokeStyle = gridColor;
+        ctx.lineWidth = 0.5;
+        for (let r = 0; r < this.ROWS; r++) {
+          for (let c = 0; c < this.COLS; c++) {
+            ctx.strokeRect(c * this.CELL, r * this.CELL, this.CELL, this.CELL);
+          }
+        }
+
+        // Board
+        for (let r = 0; r < this.ROWS; r++) {
+          for (let c = 0; c < this.COLS; c++) {
+            if (this.board[r][c]) {
+              this.drawCell(ctx, c, r, this.board[r][c]);
+            }
+          }
+        }
+
+        // Ghost
+        if (this.current) {
+          const gy = this.ghostY();
+          if (gy !== this.current.y) {
+            this.current.shape.forEach((row, r) => {
+              row.forEach((v, c) => {
+                if (v) this.drawCell(ctx, this.current.x + c, gy + r, this.current.color, 0.2);
+              });
+            });
+          }
+
+          // Active piece
+          this.current.shape.forEach((row, r) => {
+            row.forEach((v, c) => {
+              if (v) this.drawCell(ctx, this.current.x + c, this.current.y + r, this.current.color);
+            });
+          });
+        }
+      }
+
+      drawCell(ctx, col, row, color, alpha = 1) {
+        const x = col * this.CELL, y = row * this.CELL, s = this.CELL;
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.fillRect(x + 1, y + 1, s - 2, s - 2);
+        // Highlight
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fillRect(x + 1, y + 1, s - 2, 3);
+        ctx.fillRect(x + 1, y + 1, 3, s - 2);
+        ctx.restore();
+      }
+
+      drawNext() {
+        if (!this.nextCtx || !this.next) return;
+        const ctx = this.nextCtx;
+        const size = this.nextCanvas.width;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        ctx.fillStyle = isDark ? '#111' : '#f0ede8';
+        ctx.fillRect(0, 0, size, size);
+        const cell = Math.min(size / 5, 16);
+        const pw = this.next.shape[0].length * cell;
+        const ph = this.next.shape.length * cell;
+        const ox = (size - pw) / 2;
+        const oy = (size - ph) / 2;
+        this.next.shape.forEach((row, r) => {
+          row.forEach((v, c) => {
+            if (v) {
+              ctx.fillStyle = this.next.color;
+              ctx.fillRect(ox + c * cell + 1, oy + r * cell + 1, cell - 2, cell - 2);
+              ctx.fillStyle = 'rgba(255,255,255,0.2)';
+              ctx.fillRect(ox + c * cell + 1, oy + r * cell + 1, cell - 2, 3);
+            }
+          });
+        });
+      }
+
+      updateUI() {
+        if (this.scoreEl) this.scoreEl.textContent = this.score.toLocaleString();
+        if (this.linesEl) this.linesEl.textContent = this.lines;
+        if (this.levelEl) this.levelEl.textContent = this.level;
+      }
+
+      showOverlay(title, sub) {
+        if (!this.overlayEl) return;
+        this.overlayEl.querySelector('.tetris-overlay-title').textContent = title;
+        const subEl = this.overlayEl.querySelector('.tetris-overlay-sub, #modalOverlaySub');
+        if (subEl) subEl.textContent = sub || '';
+        this.overlayEl.style.display = 'flex';
+      }
+
+      hideOverlay() {
+        if (this.overlayEl) this.overlayEl.style.display = 'none';
+      }
+    }
+
+    // ========================
+    // WIDGET GAME (small)
+    // ========================
+    const widgetGame = new TetrisGame(
+      document.getElementById('tetrisCanvas'),
+      document.getElementById('widgetNextCanvas'),
+      document.getElementById('widgetScore'),
+      document.getElementById('widgetLines'),
+      null,
+      document.getElementById('widgetOverlay'),
+      12
+    );
+
+    document.getElementById('widgetStartBtn').addEventListener('click', () => {
+      widgetGame.start();
+    });
+
+    document.getElementById('widgetRestartBtn').addEventListener('click', () => {
+      widgetGame.start();
+    });
+
+    // ========================
+    // MODAL GAME (large)
+    // ========================
+    const modalGame = new TetrisGame(
+      document.getElementById('tetrisModalCanvas'),
+      document.getElementById('modalNextCanvas'),
+      document.getElementById('modalScore'),
+      document.getElementById('modalLines'),
+      document.getElementById('modalLevel'),
+      document.getElementById('modalOverlay'),
+      24
+    );
+
+    document.getElementById('modalStartBtn').addEventListener('click', () => {
+      modalGame.start();
+    });
+
+    // Fullscreen open/close
+    const modal = document.getElementById('tetrisModal');
+
+    document.getElementById('fullscreenBtn').addEventListener('click', () => {
+      // Pause widget game
+      if (widgetGame.running && !widgetGame.paused) widgetGame.pause();
+      modal.classList.add('open');
+      // Start modal game if not running
+      if (!modalGame.running || modalGame.gameOver) {
+        // Show overlay
+        modalGame.showOverlay('Tetris', 'Press Start to play');
+        modalGame.gameOver = false;
+        modalGame.draw();
+      }
+    });
+
+    document.getElementById('modalClose').addEventListener('click', () => {
+      modal.classList.remove('open');
+      modalGame.stopGame();
+      modalGame.showOverlay('Tetris', 'Press Start to play');
+      modalGame.draw();
+    });
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        modalGame.stopGame();
+        modalGame.showOverlay('Tetris', 'Press Start to play');
+        modalGame.draw();
+      }
+    });
+
+    // ========================
+    // KEYBOARD CONTROLS
+    // ========================
+    document.addEventListener('keydown', (e) => {
+      const isModalOpen = modal.classList.contains('open');
+      const game = isModalOpen ? modalGame : widgetGame;
+
+      if (!game.running || game.gameOver) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':  e.preventDefault(); game.moveLeft(); break;
+        case 'ArrowRight': e.preventDefault(); game.moveRight(); break;
+        case 'ArrowUp':    e.preventDefault(); game.rotate(); break;
+        case 'ArrowDown':  e.preventDefault(); game.softDrop(); break;
+        case ' ':          e.preventDefault(); game.hardDrop(); break;
+        case 'p': case 'P':
+          if (isModalOpen) game.pause();
+          break;
+      }
+    });
+
+    // Initial draw
+    widgetGame.draw();
+    modalGame.draw();
+
+    // ========================
+    // MEDIUM BLOG
+    // ========================
+    async function loadBlog() {
+      const grid = document.getElementById('blogGrid');
+      try {
+        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40rivaldynaiborhu');
+        const data = await res.json();
+        if (data.status !== 'ok' || !data.items?.length) {
+          grid.innerHTML = `<div class="blog-loading">Belum ada artikel tersedia.</div>`;
+          return;
+        }
+        const items = data.items.slice(0, 6);
+        grid.innerHTML = items.map(item => {
+          const date = new Date(item.pubDate).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+          const excerpt = item.description.replace(/<[^>]+>/g,'').substring(0, 140).trim();
+          return `
+            <a class="blog-card" href="${item.link}" target="_blank">
+              <div class="blog-date">${date}</div>
+              <h3 class="blog-title">${item.title}</h3>
+              <p class="blog-excerpt">${excerpt}…</p>
+              <span class="blog-link">Read article →</span>
+            </a>`;
+        }).join('');
+      } catch (e) {
+        grid.innerHTML = `<div class="blog-loading">Gagal memuat artikel.</div>`;
+      }
+    }
+    loadBlog();
+
+    // ========================
+    // SCROLL REVEAL
+    // ========================
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 4) * 60}ms`;
+      observer.observe(el);
+    });
+  </script>
+</body>
 </html>
